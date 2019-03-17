@@ -1,0 +1,12 @@
+SMAP
+coretags_jsp.java
+JSP
+*S JSP
+*F
++ 0 coretags.jsp
+jstl/coretags.jsp
+*L
+5,13:54
+17:90,7
+17,4:69
+*E
