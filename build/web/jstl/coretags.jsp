@@ -56,5 +56,20 @@
             <c:out value="${i}"></c:out>
         </c:forEach>
             
+          
+     <hr>
+     <c:forTokens items="Anar Saiq Kamal Kamran" delims=" " var="name">  
+         <c:out value="${name}"/><p>  
+     </c:forTokens> 
+             
+             <c:url value="http://localhost:8080/WebApp1/triangle.jsp" var="completeURL">  
+                 <c:param name="a" value="6"/>  
+                 <c:param name="b" value="7"/>  
+                 <c:param name="c" value="8"/>  
+              </c:url>  
+       ${completeURL}  
+
+  
+             
     </body>
 </html>

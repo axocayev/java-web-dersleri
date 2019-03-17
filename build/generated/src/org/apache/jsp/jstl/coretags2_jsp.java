@@ -1,11 +1,12 @@
-package org.apache.jsp;
+package org.apache.jsp.jstl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import az.webapp.Triangel;
+import az.jstltags.Student;
+import java.util.ArrayList;
 
-public final class triangle_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class coretags2_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -46,60 +47,49 @@ public final class triangle_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>JSP Page</title>\n");
-      out.write("        \n");
-      out.write("        <script>\n");
-      out.write("            function  f(){\n");
-      out.write("                alert(\"Cliekced....\");\n");
-      out.write("            }\n");
-      out.write("            \n");
-      out.write("        </script>\n");
-      out.write("            \n");
-      out.write("        \n");
+      out.write("    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css\">\n");
+      out.write("  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\n");
+      out.write("  <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js\"></script>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("       \n");
-      out.write("        <button onclick=\"f()\" >Click me</button>\n");
-      out.write("        \n");
+      out.write("     \n");
       out.write("        ");
 
-           Triangel  t=new Triangel();
-        try{
-            double a=Double.parseDouble(request.getParameter("a"));
-            double b=Double.parseDouble(request.getParameter("b"));
-            double c=Double.parseDouble(request.getParameter("c"));
-            
-           
-            t.setA(a);
-            t.setB(b);
-            t.setC(c);
-            
-            out.print("<br>Area is  "+t.getArea());
-            out.print("<br>Perimeter is  "+t.getPerimetr());
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        
+            Student st1=new Student("Anar","Xocayev",25);
+            Student st2=new Student("Saiq","Huseyzade",100);
+            Student st3=new Student("Kamal","Aliyev",35);
+            Student st4=new Student("Samir","Agayev",75);
+            ArrayList<Student> st=new ArrayList<Student>();
+            st.add(st1);
+            st.add(st2);
+            st.add(st3);
+            st.add(st4);
         
       out.write("\n");
-      out.write("          <form action=\"\"  method=\"GET\" >\n");
-      out.write("            A:<input type=\"number\" name=\"a\" value=\"");
- out.print(t.getA()); 
-      out.write("\" ><br/>\n");
-      out.write("            B:<input type=\"number\" name=\"b\" value=\"");
- out.print(t.getB()); 
-      out.write("\" ><br/>\n");
-      out.write("            C:<input type=\"number\" name=\"c\" value=\"");
- out.print(t.getC()); 
-      out.write("\" ><br/>\n");
-      out.write("            <input type=\"submit\" value=\"Calculate\">\n");
-      out.write("            \n");
-      out.write("        </form>\n");
+      out.write("        \n");
+      out.write("        <div class=\"container\">\n");
+      out.write("  <h2>Contextual Classes</h2>\n");
+      out.write("  <p>Contextual classes can be used to color table rows or table cells. The classes that can be used are: .active, .success, .info, .warning, and .danger.</p>\n");
+      out.write("  <table class=\"table\">\n");
+      out.write("    <thead>\n");
+      out.write("      <tr>\n");
+      out.write("        <th>Firstname</th>\n");
+      out.write("        <th>Lastname</th>\n");
+      out.write("        <th>Point</th>\n");
+      out.write("      </tr>\n");
+      out.write("    </thead>\n");
+      out.write("    <tbody>\n");
+      out.write("    </tbody>\n");
+      out.write("  </table>\n");
+      out.write("</div> \n");
+      out.write("        \n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
