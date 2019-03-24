@@ -21,6 +21,7 @@
     <body>
         <div class="container">
             <h2>Horizontal form</h2>  
+            <a href="list.jsp">All Contact</a>
             <form class="form-horizontal" action="" method="GET">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name"> Name</label>
@@ -71,6 +72,7 @@
             String email=request.getParameter("email");
             String phone=request.getParameter("phone");
             String address=request.getParameter("address");
+           
             PhoneBook pb=new PhoneBook();
             pb.setId(0);
             pb.setName(name);
@@ -78,15 +80,28 @@
             pb.setEmail(email);
             pb.setPhone(phone);
             pb.setAddress(address);
+            System.out.println("pb  is "+pb);
             ///validator 
             
             // check all parameter if all param are setted then write to file
             //if (pb.getEmail()!=null )
-            FileOperation fo=new FileOperation();
-            fo.addPhonebook(pb);
+            System.out.println("email is  "+pb.getEmail().length());
+            if ( (pb.getName()!=null  && pb.getName().length()>0)
+                    && (pb.getSurname()!=null && pb.getSurname().length()>0)
+                    && (pb.getEmail() != null && pb.getEmail().length()>0)
+                    && (pb.getPhone()!=null && pb.getPhone().length()>0)
+                    && pb.getAddress()!=null){
+                System.out.println("pb if true "+pb);
+               FileOperation fo=new FileOperation();
+               fo.addPhonebook(pb);
+            }else{
+                System.out.println("pb if false "+pb);
+
+                
+            }
             
         }catch(Exception e){
-            
+            e.printStackTrace();
         }
         
         %>

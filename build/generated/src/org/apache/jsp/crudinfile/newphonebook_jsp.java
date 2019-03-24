@@ -3,6 +3,8 @@ package org.apache.jsp.crudinfile;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import az.phonebook.fileop.FileOperation;
+import az.phonebook.model.PhoneBook;
 
 public final class newphonebook_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -44,35 +46,99 @@ public final class newphonebook_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>JSP Page</title>\n");
+      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
+      out.write("        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css\">\n");
+      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\n");
+      out.write("        <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js\"></script>\n");
+      out.write("\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("        <form class=\"form-horizontal\" action=\"\">\n");
-      out.write("            <div class=\"form-group\">\n");
-      out.write("                <label class=\"control-label col-sm-2\" for=\"name\"> Name</label>\n");
-      out.write("                <div class=\"col-sm-10\">\n");
-      out.write("                    <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter name\" name=\"name\">\n");
+      out.write("        <div class=\"container\">\n");
+      out.write("            <h2>Horizontal form</h2>  \n");
+      out.write("            <form class=\"form-horizontal\" action=\"\" method=\"GET\">\n");
+      out.write("                <div class=\"form-group\">\n");
+      out.write("                    <label class=\"control-label col-sm-2\" for=\"name\"> Name</label>\n");
+      out.write("                    <div class=\"col-sm-10\">\n");
+      out.write("                        <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Enter name\" name=\"name\">\n");
+      out.write("                    </div>\n");
       out.write("                </div>\n");
-      out.write("            </div>\n");
-      out.write("           \n");
-      out.write("             <div class=\"form-group\">\n");
-      out.write("                <label class=\"control-label col-sm-2\" for=\"surname\"> SurName</label>\n");
-      out.write("                <div class=\"col-sm-10\">\n");
-      out.write("                    <input type=\"text\" class=\"form-control\" id=\"surname\" placeholder=\"Enter surname\" name=\"name\">\n");
+      out.write("\n");
+      out.write("                <div class=\"form-group\">\n");
+      out.write("                    <label class=\"control-label col-sm-2\" for=\"surname\"> SurName</label>\n");
+      out.write("                    <div class=\"col-sm-10\">\n");
+      out.write("                        <input type=\"text\" class=\"form-control\" id=\"surname\" placeholder=\"Enter surname\" name=\"surname\">\n");
+      out.write("                    </div>\n");
       out.write("                </div>\n");
-      out.write("            </div>\n");
-      out.write("            \n");
-      out.write("            \n");
-      out.write("            <div class=\"form-group\">        \n");
-      out.write("                <div class=\"col-sm-offset-2 col-sm-10\">\n");
-      out.write("                    <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n");
+      out.write("                <div class=\"form-group\">\n");
+      out.write("                    <label class=\"control-label col-sm-2\" for=\"email\"> email</label>\n");
+      out.write("                    <div class=\"col-sm-10\">\n");
+      out.write("                        <input type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Enter email\" name=\"email\">\n");
+      out.write("                    </div>\n");
       out.write("                </div>\n");
-      out.write("            </div>\n");
-      out.write("        </form>\n");
+      out.write("\n");
+      out.write("                <div class=\"form-group\">\n");
+      out.write("                    <label class=\"control-label col-sm-2\" for=\"phone\"> phone</label>\n");
+      out.write("                    <div class=\"col-sm-10\">\n");
+      out.write("                        <input type=\"text\" class=\"form-control\" id=\"phone\" placeholder=\"Enter phone\" name=\"phone\">\n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("\n");
+      out.write("                <div class=\"form-group\">\n");
+      out.write("                    <label class=\"control-label col-sm-2\" for=\"address\"> address</label>\n");
+      out.write("                    <div class=\"col-sm-10\">\n");
+      out.write("                        <input type=\"text\" class=\"form-control\" id=\"address\" placeholder=\"Enter address\" name=\"address\">\n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("                <div class=\"form-group\">        \n");
+      out.write("                    <div class=\"col-sm-offset-2 col-sm-10\">\n");
+      out.write("                        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("            </form>\n");
+      out.write("        </div>\n");
+      out.write("        \n");
+      out.write("        ");
+ try{
+            String name=request.getParameter("name");
+            String sname=request.getParameter("surname");
+            String email=request.getParameter("email");
+            String phone=request.getParameter("phone");
+            String address=request.getParameter("address");
+            PhoneBook pb=new PhoneBook();
+            pb.setId(0);
+            pb.setName(name);
+            pb.setSurname(sname);
+            pb.setEmail(email);
+            pb.setPhone(phone);
+            pb.setAddress(address);
+            ///validator 
+            
+            // check all parameter if all param are setted then write to file
+            //if (pb.getEmail()!=null )
+            
+            if ( pb.getName()!=null && pb.getSurname()!=null 
+                    && pb.getEmail() != null && pb.getPhone()!=null
+                    && pb.getAddress()!=null){
+               FileOperation fo=new FileOperation();
+               fo.addPhonebook(pb);
+            }
+            
+        }catch(Exception e){
+            
+        }
+        
+        
+      out.write("\n");
+      out.write("        \n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

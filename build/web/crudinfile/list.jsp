@@ -58,6 +58,8 @@
                 </tbody>
 
             </table>
+                         <a href="newphonebook.jsp">Add new contact</a>
         </div>
+               
     </body>
 </html>
