@@ -23,6 +23,7 @@
     <body>
 
         <div class="container">
+            <h3>All Conatct</h3>
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
@@ -32,7 +33,8 @@
                         <th>Email</th>
                         <th>Telefon</th>
                         <th>Adres</th>
-                        <th>Əməliyyatlar</th>
+                        <th>Update </th>
+                        <th>Delete </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,8 +51,10 @@
                             <td> <c:out value="${pb.getEmail()}"></c:out></td>  
                             <td> <c:out value="${pb.getPhone()}"></c:out></td>  
                             <td> <c:out value="${pb.getAddress()}"></c:out></td>  
-                                <td> <a href="#">Update</a></td>  
-
+                            <td> <a href="newphonebook.jsp?pid=${pb.getId()}" class="btn btn-primary">Update</a></td>  
+                            <td> <a href="delete.jsp?pid=${pb.getId()}" 
+                                    class="btn btn-danger"
+                                    onclick="return confirm('Are you sure?');">Delete</a></td>  
                             </tr>    
                     </c:forEach>    
 

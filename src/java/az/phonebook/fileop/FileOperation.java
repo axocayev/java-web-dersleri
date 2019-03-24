@@ -12,10 +12,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -30,12 +33,15 @@ public class FileOperation {
     }
 
     private String getAttribute(String line, int start, int end) {
-        return line.substring(start,  end).trim();
+        return line.substring(start, end).trim();
     }
 
     public boolean addPhonebook(PhoneBook pb) {
+
         boolean res = false;
+
         try {
+
             FileOutputStream fileOutputStream = new FileOutputStream(f, true);
             fileOutputStream.write(padleft(String.valueOf(pb.getId()), PropertyPaddingLength.ID).getBytes());
             fileOutputStream.write(padleft(pb.getName(), PropertyPaddingLength.NAME).getBytes());
@@ -52,9 +58,10 @@ public class FileOperation {
     }
 
     public static void main(String[] args) {
-       /* FileOperation fo = new FileOperation();
-        System.out.println(fo.getAllPhoneBook());*/
-         PhoneBook book = new PhoneBook();
+        FileOperation fo = new FileOperation();
+        ///System.out.println(fo.getAllPhoneBook());
+        System.out.println(fo.getPhoneBookById(1));
+        /*PhoneBook book = new PhoneBook();
         book.setId(3);
         book.setName("Kamal");
         book.setSurname("Aliyev");
@@ -63,7 +70,7 @@ public class FileOperation {
         book.setAddress("Baki s. Xetai ray, Azadliq kuc, 76");
 
         FileOperation fo = new FileOperation();
-        fo.addPhonebook(book);
+        fo.addPhonebook(book);*/
     }
 
     public List<PhoneBook> getAllPhoneBook() {
@@ -94,7 +101,90 @@ public class FileOperation {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileOperation.class.getName()).log(Level.ALL.SEVERE, null, ex);
         }
+        Collections.sort(list);
+
         return list;
+    }
+
+    public int getNextId() {
+        try {
+            List<PhoneBook> list = getAllPhoneBook();
+
+            Collections.sort(list, Collections.reverseOrder());
+            PhoneBook pb = list.get(0);
+            return pb.getId() + 1;
+        } catch (IndexOutOfBoundsException e) {
+            return 1;
+        }
+    }
+
+    public boolean updatePhoneBook(PhoneBook pb_inp) {
+        System.out.println("Update " + pb_inp);
+        List<PhoneBook> list = getAllPhoneBook();
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(f);
+            fileOutputStream.close();
+            System.out.println("File cleared");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileOperation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Start new wrtiting ");
+        for (PhoneBook pb : list) {
+            if (pb.getId() == pb_inp.getId()) {
+                addPhonebook(pb_inp);
+
+            } else {
+                addPhonebook(pb);
+            }
+            System.out.println("update num " + pb);
+        }
+        System.out.println("finished");
+        return true;
+    }
+
+    public boolean deletePhoneBook(int pb_id) {
+
+     PhoneBook pb_inp=getPhoneBookById(pb_id);
+     
+        List<PhoneBook> list = getAllPhoneBook();
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(f);
+            fileOutputStream.close();
+            System.out.println("File cleared");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileOperation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Start new wrtiting ");
+        for (PhoneBook pb : list) {
+            if (pb.getId() == pb_inp.getId()) {
+               // addPhonebook(pb_inp);
+
+            } else {
+                addPhonebook(pb);
+            }
+            System.out.println("update num " + pb);
+        }
+        System.out.println("finished");
+        return true;
+    }
+
+    public PhoneBook getPhoneBookById(int pbId) {
+
+        /*  return getAllPhoneBook().
+                stream().
+                filter(phonebook->phonebook.getId()==pbId).collect(Collectors.toList()).
+                get(0);*/
+        for (PhoneBook pb : getAllPhoneBook()) {
+            if (pb.getId() == pbId) {
+                return pb;
+            }
+        }
+        return null;
+
     }
 
 }

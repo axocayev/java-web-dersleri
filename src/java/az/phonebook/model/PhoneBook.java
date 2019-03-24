@@ -9,7 +9,7 @@ package az.phonebook.model;
  *
  * @author anarx
  */
-public class PhoneBook {
+public class PhoneBook implements Comparable<PhoneBook>{
     private int id;
     private String name,surname,email,phone,address;
 
@@ -64,6 +64,12 @@ public class PhoneBook {
     @Override
     public String toString() {
         return "PhoneBook{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", phone=" + phone + ", address=" + address + '}';
+    }
+
+    @Override
+    public int compareTo(PhoneBook o) {
+      return this.id-o.getId();
+
     }
      
 }
