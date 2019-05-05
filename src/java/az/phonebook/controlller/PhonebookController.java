@@ -6,10 +6,7 @@
 package az.phonebook.controlller;
 
 import az.phonebook.fileop.FileOperation;
-import org.apache.commons.fileupload.*;
-import org.apache.commons.fileupload.disk.*;
-import org.apache.commons.fileupload.servlet.*;
-import org.apache.commons.io.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;

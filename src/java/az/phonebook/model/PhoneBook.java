@@ -9,6 +9,7 @@ package az.phonebook.model;
  *
  * @author anarx
  */
+//MOdel class
 public class PhoneBook implements Comparable<PhoneBook>{
     private int id;
     private String name,surname,email,phone,address;
