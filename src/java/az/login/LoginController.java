@@ -5,6 +5,8 @@
  */
 package az.login;
 
+import az.database.UserDao;
+import az.phonebook.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -71,6 +73,13 @@ public class LoginController extends HttpServlet {
             if (session.getAttribute("username") != null) {
                 request.setAttribute("u", session.getAttribute("username"));
                 request.setAttribute("p", session.getAttribute("password"));
+                request.setAttribute("user", 
+                        new UserDao().
+                        getUserByPasswordAnLogin(
+                        session.getAttribute("username").toString(), 
+                        session.getAttribute("password").toString()));
+                
+                
                 RequestDispatcher rd = request.getRequestDispatcher("/login/profile.jsp");
                 rd.include(request, response);
 
@@ -94,8 +103,10 @@ public class LoginController extends HttpServlet {
             String u = request.getParameter("username");
             String p = request.getParameter("password");
             System.out.println(u + "  " + p);
-
-            if (u.equals("anarxocayev") && p.equals("1")) {
+          UserDao  dao=new UserDao();
+          User user=dao.getUserByPasswordAnLogin(u, p);
+          
+            if (user!=null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", u);
                 session.setAttribute("password", p);

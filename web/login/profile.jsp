@@ -13,8 +13,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        User name <c:out value="${u}"></c:out><br>
-        Password <c:out value="${p}"></c:out><br>
+        ID <c:out value="${user.getId()}"></c:out><br>
+        NAme <c:out value="${user.getName()}"></c:out><br>
+        SurNAme <c:out value="${user.getSurname()}"></c:out><br>
+        Status <c:out value="${user.getStatus()}"></c:out><br>
+        
                 <a href="logoff">Logoff</a>
 
 
